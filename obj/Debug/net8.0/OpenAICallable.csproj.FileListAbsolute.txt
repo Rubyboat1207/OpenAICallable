@@ -1,0 +1,17 @@
+F:\Dev\cs\OpenAICallable\bin\Debug\net8.0\OpenAICallable.exe
+F:\Dev\cs\OpenAICallable\bin\Debug\net8.0\OpenAICallable.deps.json
+F:\Dev\cs\OpenAICallable\bin\Debug\net8.0\OpenAICallable.runtimeconfig.json
+F:\Dev\cs\OpenAICallable\bin\Debug\net8.0\OpenAICallable.dll
+F:\Dev\cs\OpenAICallable\bin\Debug\net8.0\OpenAICallable.pdb
+F:\Dev\cs\OpenAICallable\obj\Debug\net8.0\OpenAICallable.GeneratedMSBuildEditorConfig.editorconfig
+F:\Dev\cs\OpenAICallable\obj\Debug\net8.0\OpenAICallable.AssemblyInfoInputs.cache
+F:\Dev\cs\OpenAICallable\obj\Debug\net8.0\OpenAICallable.AssemblyInfo.cs
+F:\Dev\cs\OpenAICallable\obj\Debug\net8.0\OpenAICallable.csproj.CoreCompileInputs.cache
+F:\Dev\cs\OpenAICallable\obj\Debug\net8.0\OpenAICallable.dll
+F:\Dev\cs\OpenAICallable\obj\Debug\net8.0\refint\OpenAICallable.dll
+F:\Dev\cs\OpenAICallable\obj\Debug\net8.0\OpenAICallable.pdb
+F:\Dev\cs\OpenAICallable\obj\Debug\net8.0\OpenAICallable.genruntimeconfig.cache
+F:\Dev\cs\OpenAICallable\obj\Debug\net8.0\ref\OpenAICallable.dll
+F:\Dev\cs\OpenAICallable\bin\Debug\net8.0\Newtonsoft.Json.dll
+F:\Dev\cs\OpenAICallable\obj\Debug\net8.0\OpenAICallable.csproj.AssemblyReference.cache
+F:\Dev\cs\OpenAICallable\obj\Debug\net8.0\OpenAICallable.csproj.CopyComplete
