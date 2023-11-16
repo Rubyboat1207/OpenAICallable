@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = OpenAICallable
-build_property.ProjectDir = F:\Dev\cs\OpenAICallable\
+build_property.ProjectDir = c:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

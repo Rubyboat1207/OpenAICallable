@@ -94,13 +94,16 @@ public class OpenAI
             parameters = new FunctionParameters();
         }
 
-        public static Function FromFunction(Delegate _delegate)
+        public static Function FromFunction(Delegate _delegate, ChatGPTFunctionAttributes? funcattrs=null)
         {
             MethodInfo methodInfo = _delegate.Method;
             Function func = new(methodInfo.Name);
             func._delegate = _delegate;
 
             var paramList = methodInfo.GetParameters();
+            if(funcattrs is not null) {
+                func.description = funcattrs.functionDescription;
+            }
 
             foreach (var parameter in paramList)
             {
@@ -114,6 +117,14 @@ public class OpenAI
                 }
 
                 ParameterProperties props = new(FunctionParameters.GetType(parameter));
+
+
+                if(funcattrs is not null) {
+                    string? desc;
+                    if(funcattrs.paramDescriptions.TryGetValue(parameter.Name, out desc)) {
+                        props.description = desc;
+                    }
+                }
 
                 func.parameters.properties.Add(parameter.Name, props);
 
@@ -140,6 +151,16 @@ public class OpenAI
             }
 
             return func;
+        }
+    }
+
+    public class ChatGPTFunctionAttributes {
+        public Dictionary<string, string> paramDescriptions;
+        public string functionDescription;
+
+        public ChatGPTFunctionAttributes(string funcDesc, Dictionary<string, string> _params) {
+            paramDescriptions = _params;
+            functionDescription = funcDesc;
         }
     }
 
@@ -173,6 +194,9 @@ public class OpenAI
             {
                 return "number";
             }else if (type == typeof(double))
+            {
+                return "number";
+            }else if (type == typeof(long))
             {
                 return "number";
             }

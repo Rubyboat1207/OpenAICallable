@@ -15,3 +15,21 @@ F:\Dev\cs\OpenAICallable\obj\Debug\net8.0\ref\OpenAICallable.dll
 F:\Dev\cs\OpenAICallable\bin\Debug\net8.0\Newtonsoft.Json.dll
 F:\Dev\cs\OpenAICallable\obj\Debug\net8.0\OpenAICallable.csproj.AssemblyReference.cache
 F:\Dev\cs\OpenAICallable\obj\Debug\net8.0\OpenAICallable.csproj.CopyComplete
+C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\bin\Debug\net8.0\OpenAICallable.exe
+C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\bin\Debug\net8.0\OpenAICallable.deps.json
+C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\bin\Debug\net8.0\OpenAICallable.runtimeconfig.json
+C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\bin\Debug\net8.0\OpenAICallable.dll
+C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\bin\Debug\net8.0\OpenAICallable.pdb
+C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\obj\Debug\net8.0\OpenAICallable.csproj.AssemblyReference.cache
+C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\obj\Debug\net8.0\OpenAICallable.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\obj\Debug\net8.0\OpenAICallable.AssemblyInfoInputs.cache
+C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\obj\Debug\net8.0\OpenAICallable.AssemblyInfo.cs
+C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\obj\Debug\net8.0\OpenAICallable.csproj.CoreCompileInputs.cache
+C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\obj\Debug\net8.0\OpenAICallable.sourcelink.json
+C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\obj\Debug\net8.0\OpenAICallable.csproj.CopyComplete
+C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\obj\Debug\net8.0\OpenAICallable.dll
+C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\obj\Debug\net8.0\refint\OpenAICallable.dll
+C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\obj\Debug\net8.0\OpenAICallable.pdb
+C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\obj\Debug\net8.0\OpenAICallable.genruntimeconfig.cache
+C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\obj\Debug\net8.0\ref\OpenAICallable.dll

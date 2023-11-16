@@ -16,7 +16,9 @@
             "stopAtEntry": false,
             "env": {
                 "openai_key": "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",
-                "OPENWEATHER_API_KEY": "07b00217288b55f853d94ccc5d492a29"
+                "OPENWEATHER_API_KEY": "07b00217288b55f853d94ccc5d492a29",
+                "tba_key": "wjV6W8uHXgZTA1gRuJEmW1lqwUt933x2OIx7hGc0qXes8ufbYjDUsEu38y9xRKY8",
+                "csfloat_key": "f3aH8zYWxTFPW8H6pDSW2rwG2Os-VTYS"
             }
         },
         {

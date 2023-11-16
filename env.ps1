@@ -1,2 +1,0 @@
-$env:OPENWEATHER_API_KEY = '9b0b310ac195082daa08987343d167d8'
-$env:openai_key = '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'
