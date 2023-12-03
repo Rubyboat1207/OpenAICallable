@@ -4,51 +4,6 @@ using Newtonsoft.Json;
 
 public static class Program
 {
-    static TBAClient tbaClient = new TBAClient(Environment.GetEnvironmentVariable("tba_key"));
-    public enum Unit
-    {
-        celsius,
-        fahrenheit
-    }
-
-    public static string GetWeatherAt(double lon, double lat, string city)
-    {
-        var client = new OpenWeatherMapClient(Environment.GetEnvironmentVariable("OPENWEATHER_API_KEY"));
-
-        var weather = client.GetWeatherByCoordinatesAsync(lat, lon).GetAwaiter().GetResult();
-
-        Console.WriteLine(weather);
-
-        return weather;
-    }
-
-    public static string[] GetFilesOnDisk(string path)
-    {
-        try
-        {
-            // Get all directories and files at the specified path
-            string[] directories = Directory.GetDirectories(path)
-                                            .Select(d => d + Path.DirectorySeparatorChar)
-                                            .ToArray();
-            string[] files = Directory.GetFiles(path);
-
-            // Combine the two arrays
-            string[] result = new string[directories.Length + files.Length];
-            directories.CopyTo(result, 0);
-            files.CopyTo(result, directories.Length);
-
-            return result;
-        }
-        catch (Exception ex)
-        {
-            // Handle exceptions (like path not found, access denied, etc.)
-            Console.WriteLine($"Error: {ex.Message}");
-            return new string[0];
-        }
-    }
-
-
-
     public static void Main(String[] args)
     {
         var req = new OpenAI.Request();
@@ -69,10 +24,12 @@ public static class Program
         // req.functions.Add(OpenAI.Function.FromFunction(tbaClient.GetDetailedMatchInfo, new("Lists matches of an event", new() {
         //     {"matchKey", "is the key value of a match returned from GetMatchInfo"}
         // })));
-        
 
 
-        req.messages.Add(new("system", "The year is 2023, events are FRC robotics events. You may have to split function calls into multiple, you can only handle 5 return values at once. You may only run functions provided. You can also run multiple in a row, even if they are the same function."));
+
+
+
+        req.messages.Add(new("system", @""));
         req.messages.Add(new("user", Console.ReadLine()));
 
         ResponseObject? response = OpenAI.Send(req).GetAwaiter().GetResult();
