@@ -223,15 +223,16 @@ public class OpenAI
         }
     }
 
-    public static async Task<ResponseObject?> Send(Request request, bool silent=true)
+    public string Url = "https://api.openai.com/v1/chat/completions";
+
+    public async Task<ResponseObject?> Send(Request request, bool silent=true)
     {
-        var Url = "https://api.openai.com/v1/chat/completions";
         var key = Environment.GetEnvironmentVariable("openai_key");
 
         using (var httpClient = new HttpClient())
         {
             // Set up headers
-            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {key}");
+            httpClient.DefaultRequestHeaders.Add("api-key", key);
             var settings = new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore,
@@ -244,7 +245,7 @@ public class OpenAI
             }
 
             var response = await httpClient.PostAsync(
-                Url,
+                Url + "/openai/deployments/" + request.model + "/chat/completions?api-version=2023-05-15",
                 new StringContent(jsonData, Encoding.UTF8, "application/json")
             );
 

@@ -33,3 +33,4 @@ C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\obj\Debug\net8.0\refin
 C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\obj\Debug\net8.0\OpenAICallable.pdb
 C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\obj\Debug\net8.0\OpenAICallable.genruntimeconfig.cache
 C:\Users\rudy\OneDrive\Desktop\C# Projects\OpenAICallable\obj\Debug\net8.0\ref\OpenAICallable.dll
+F:\Dev\cs\OpenAICallable\obj\Debug\net8.0\OpenAICallable.sourcelink.json

@@ -4,57 +4,61 @@ using Newtonsoft.Json;
 
 public static class Program
 {
-    static TBAClient tbaClient = new TBAClient(Environment.GetEnvironmentVariable("tba_key"));
-    public enum Unit
-    {
-        celsius,
-        fahrenheit
+
+    public static string CreateCallback(string identifier, string luaCodeString) {
+        File.WriteAllText("./addon/callbacks/"+identifier, luaCodeString);
+
+        return "callback created successfully. Do not call again, you may be a risk of overriding the file.";
     }
 
-    public static string GetWeatherAt(double lon, double lat, string city)
-    {
-        var client = new OpenWeatherMapClient(Environment.GetEnvironmentVariable("OPENWEATHER_API_KEY"));
+    public static string CreateInit(string luaCodeString) {
+        File.WriteAllText("./addon/init.lua", luaCodeString);
 
-        var weather = client.GetWeatherByCoordinatesAsync(lat, lon).GetAwaiter().GetResult();
-
-        Console.WriteLine(weather);
-
-        return weather;
+        return "init.lua created successfully. Do not call again, you may be a risk of overriding the file.";
     }
 
-    public static string[] GetFilesOnDisk(string path)
-    {
-        try
-        {
-            // Get all directories and files at the specified path
-            string[] directories = Directory.GetDirectories(path)
-                                            .Select(d => d + Path.DirectorySeparatorChar)
-                                            .ToArray();
-            string[] files = Directory.GetFiles(path);
+    public static string CreateRender(string luaCodeString) {
+        File.WriteAllText("./addon/render.lua", luaCodeString);
 
-            // Combine the two arrays
-            string[] result = new string[directories.Length + files.Length];
-            directories.CopyTo(result, 0);
-            files.CopyTo(result, directories.Length);
-
-            return result;
-        }
-        catch (Exception ex)
-        {
-            // Handle exceptions (like path not found, access denied, etc.)
-            Console.WriteLine($"Error: {ex.Message}");
-            return new string[0];
-        }
+        return "render.lua created successfully. Do not call again, you may be a risk of overriding the file.";
     }
 
+    public static string CreateManifestTextFile(string jsonString) {
+        File.WriteAllText("./addon/manifest.json", jsonString);
 
+        return "manifest created successfully. Do not call again, you may be a risk of overriding the file.";
+    }
 
     public static void Main(String[] args)
     {
+        var ai = new OpenAI();
         var req = new OpenAI.Request();
 
+        req.model = "rubyboat-gpt4-regular";
+        ai.Url = "https://jeremyai.openai.azure.com";
 
-        // req.functions.Add(OpenAI.Function.FromFunction(GetFilesOnDisk));
+
+        req.functions.Add(OpenAI.Function.FromFunction(CreateCallback, new OpenAI.ChatGPTFunctionAttributes(
+            "creates a callback file. Call once to create the file. Calling a second time will completly override the contents.", _params: new Dictionary<string, string>() {
+                {"identifier", "The identifier of the callback."},
+                {"luaCodeString", "The content of the file"},
+            }
+        )));
+        req.functions.Add(OpenAI.Function.FromFunction(CreateInit, new OpenAI.ChatGPTFunctionAttributes(
+            "Call once to create the file. Calling a second time will completly override the contents.", _params: new Dictionary<string, string>() {
+                {"luaCodeString", "The content of the file"},
+            }
+        )));
+        req.functions.Add(OpenAI.Function.FromFunction(CreateRender, new OpenAI.ChatGPTFunctionAttributes(
+            "Call once to create the file. Calling a second time will completly override the contents.", _params: new Dictionary<string, string>() {
+                {"luaCodeString", "The content of the file"},
+            }
+        )));
+        req.functions.Add(OpenAI.Function.FromFunction(CreateManifestTextFile, new OpenAI.ChatGPTFunctionAttributes(
+            "Call once to create the file. Calling a second time will completly override the contents.", _params: new Dictionary<string, string>() {
+                {"jsonString", "The JSON string to be written to disk. Do not pass the raw json into this function. pass a json string into this function."},
+            }
+        )));
         // req.functions.Add(OpenAI.Function.FromFunction(GetWeatherAt));
         // req.functions.Add(OpenAI.Function.FromFunction(tbaClient.GetEvents, new("Gets a list of all events for a given year", new() {
         //     {"year", "the current year"},
@@ -69,13 +73,22 @@ public static class Program
         // req.functions.Add(OpenAI.Function.FromFunction(tbaClient.GetDetailedMatchInfo, new("Lists matches of an event", new() {
         //     {"matchKey", "is the key value of a match returned from GetMatchInfo"}
         // })));
-        
 
 
-        req.messages.Add(new("system", "The year is 2023, events are FRC robotics events. You may have to split function calls into multiple, you can only handle 5 return values at once. You may only run functions provided. You can also run multiple in a row, even if they are the same function."));
+
+        req.messages.Add(new("system", @"Your goal is to create an addon. Addons are a series of files, starting with the manifest.json which there is only one per project which contains several properties.
+        version: string, identifier: string, name: string, categories: string[], callbacks: : string[]. callbacks must be registered in the callbacks list in manifest.json, otherwise they do not work.
+        other than the manifest.json, everything else is written in lua, in the render.lua and init.lua files. The render.lua function runs every render. init.lua only runs once.
+        The Lua documentation for all functions are as follows: ```" + File.ReadAllText("./commonlib.lua") + @"``` Persistent variables persist through reloads. An addon must always run the setHudWindowName function in init.
+        to get the handle required for almost all functions, you will run the getCurrentHandle() function, which you can save to a local variable as it will not change throught the duration of the file.
+        A widget is required to have a position, optionally a scale. A button or checkbox requires a label. A button requires an onclick. If you are going to do seperate screens, place the screen rendering code into render, not init and use if statements to split screens and
+        to disable the rendering of widgets on screen swap. All widgets must be created in init, and never in render. you can reference them using their identifiers. functions do not work outside the current file. functions do not work outside the current file.
+        functions do not work outside the current file. functions do not work outside the current file. functions do not work outside the current file. never create your own functions ever. never create your own functions ever.
+        you must create a widget before you can modify its properties. defer most logic to render. init is only for window and widget setup. An addon must always run the setHudWindowName function otherwise it will fail.
+        Global variables do not persist beyond files, so use persistent data instead. Any updating data that needs to transfer between a callback, init, or render must be in persistent data."));
         req.messages.Add(new("user", Console.ReadLine()));
 
-        ResponseObject? response = OpenAI.Send(req).GetAwaiter().GetResult();
+        ResponseObject? response = ai.Send(req).GetAwaiter().GetResult();
 
         // talk cycle
         while (true)
@@ -123,7 +136,7 @@ public static class Program
                 req.messages.Add(new("function", JsonConvert.SerializeObject(retval), call.Name));
             }
 
-            response = OpenAI.Send(req, true).GetAwaiter().GetResult();
+            response = ai.Send(req, true).GetAwaiter().GetResult();
         }
 
     }
